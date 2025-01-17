@@ -18,56 +18,69 @@ namespace WindowsFormsApp5
         }
 
         private void btnCalculate_Click(object sender, EventArgs e)
-     
+
         {
-                
-                var inputStr = txtBxEnter.Text;
-                var naturalNamber = int.Parse(inputStr);
-                var inputStr2 = txtBxEnterLargeDividers.Text;
-                var naturalNamber2 = int.Parse(inputStr2);
 
-                var result = 0;
-                var result_1 = 0;
-                var result_2 = 0;
-                var result_3 = 0;               
-                
-                var dividers = "";
-                var evenNumbers = "";
-                var oddNumbers = "";
-                var largeDividers = "";
+            var inputStr = txtBxEnter.Text;
+            var naturalNamber = int.Parse(inputStr);
+            var inputStr2 = txtBxEnterLargeDividers.Text;
+            var naturalNamber2 = 0;
 
-                for (int i = 1; i <= naturalNamber; i++)
+            if (!string.IsNullOrWhiteSpace(inputStr2))
+            {
+                naturalNamber2 = int.Parse(inputStr2);
+            }
+
+            var sumDividers = 0;
+            var sumEvenNumbers = 0;
+            var sumOddNumbers = 0;               
+            var sumLargeDividers = 0;
+
+
+            var dividers = "";
+            var evenNumbers = "";
+            var oddNumbers = "";
+            var largeDividers = "";
+
+            for (int i = 1; i <= naturalNamber; i++)
+            {
+                if (naturalNamber % i == 0)
                 {
-                    if (naturalNamber % i == 0)
-                    {   
-                        dividers = dividers + " " + i;
-                        result = result + i;
-                    }
-                    if (naturalNamber % i == 0 && i % 2 == 0)
-                    {    
+                    dividers = dividers + " " + i;
+                    sumDividers = sumDividers + i;
+
+                    if (i % 2 == 0)
+                    {
                         evenNumbers = evenNumbers + " " + i;
-                        result_1 = result_1 + i;
+                        sumEvenNumbers = sumEvenNumbers + i;
                     }
-                    if (naturalNamber % i == 0 && i % 2 != 0)
-                    {    
+                    else
+                    {
                         oddNumbers = oddNumbers + " " + i;
-                        result_2 = result_2 + i;
+                        sumOddNumbers = sumOddNumbers + i;
                     }
-                    if (naturalNamber % i == 0 && i > naturalNamber2)
-                    {                   
-                     largeDividers = largeDividers + " " + i;
-                    result_3 = result_3 + i;
+
+                    if (i > naturalNamber2 && !string.IsNullOrWhiteSpace(inputStr2))
+                    {
+                        largeDividers = largeDividers + " " + i;
+                        sumLargeDividers = sumLargeDividers + i;
                     }
 
                 }
+
+            }
+
             txtBxDividers.Text = dividers;
-            txtBxSumDividers.Text = result.ToString();
-            txtBxEvenNumbers.Text = evenNumbers;           
-            txtBxSumEvenNumbers.Text = result_1.ToString();
+            txtBxSumDividers.Text = sumDividers.ToString();
+            txtBxEvenNumbers.Text = evenNumbers;
+            txtBxSumEvenNumbers.Text = sumEvenNumbers.ToString();
             txtBxOddNumbers.Text = oddNumbers;
-            txtBxSumOddNumders.Text = result_2.ToString();
-            txtBxLargeDividers.Text = largeDividers;
-            txtBxSumLargeDividers.Text = result_3.ToString();
+            txtBxSumOddNumders.Text = sumOddNumbers.ToString();
+            txtBxLargeDividers.Text = largeDividers;  
+            
+            if (!string.IsNullOrWhiteSpace(inputStr2))
+            txtBxSumLargeDividers.Text = sumLargeDividers.ToString();
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
